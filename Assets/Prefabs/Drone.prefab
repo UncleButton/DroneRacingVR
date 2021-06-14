@@ -324,9 +324,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RigBaseGameObject: {fileID: 6887520242524973897}
-  m_CameraFloorOffsetObject: {fileID: 0}
-  m_CameraGameObject: {fileID: 0}
-  m_RequestedTrackingOriginMode: 0
+  m_CameraFloorOffsetObject: {fileID: 383547792847262273}
+  m_CameraGameObject: {fileID: 8224483691593551838}
+  m_RequestedTrackingOriginMode: 1
   m_CameraYOffset: 1.36144
   m_TrackingSpace: 3
   m_TrackingOriginMode: -2147483648
@@ -534,14 +534,10 @@ MonoBehaviour:
   thrusterNegXNegZ: {fileID: 7914599981096584143}
   thrusterPosXPosZ: {fileID: 3178050152862741818}
   thrusterNegXPosZ: {fileID: 5967220047639142528}
-  masterThrust: 2.2
-  correctionThrust: 0.2
+  masterThrust: 3
+  correctionThrust: 0.1
   minimumThrust: 1
   stabilizationSpeed: 0.25
-  posXThrust: 0
-  negXThrust: 0
-  posZThrust: 0
-  negZThrust: 0
 --- !u!54 &646827686365464766
 Rigidbody:
   m_ObjectHideFlags: 0
