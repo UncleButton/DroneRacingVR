@@ -35,10 +35,10 @@ public class FlightController : MonoBehaviour
     public float minimumThrust = 2.2f;
     public float stabilizationSpeed = 1f;
 
-    public float posXThrust = 0f;
-    public float negXThrust = 0f;
-    public float posZThrust = 0f;
-    public float negZThrust = 0f;
+    private float posXThrust = 0f;
+    private float negXThrust = 0f;
+    private float posZThrust = 0f;
+    private float negZThrust = 0f;
 
 
     // Start is called before the first frame update
