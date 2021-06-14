@@ -34,6 +34,7 @@ public class FlightController : MonoBehaviour
     public float correctionThrust = 0.2f;
     public float minimumThrust = 2.2f;
     public float stabilizationSpeed = 1f;
+    public float spinMultiplier = 0.5f;
 
     private float posXThrust = 0f;
     private float negXThrust = 0f;
@@ -87,7 +88,7 @@ public class FlightController : MonoBehaviour
 
         //spinning
         if (Mathf.Abs(spinAxis.x) > 0.1)
-            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + spinAxis.x, flightDeckT.rotation.eulerAngles.z);
+            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + spinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
         //lift based on lift trigger
         masterThrust = liftMultiplier * masterThrustCopy;
