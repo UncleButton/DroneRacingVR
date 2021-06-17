@@ -713,8 +713,13 @@ MonoBehaviour:
   thrusterNegXPosZ: {fileID: 5967220047639142528}
   masterThrust: 5
   correctionThrust: 0.1
-  minimumThrust: 1
+  minimumThrust: 0
   stabilizationSpeed: 0.5
+  spinMultiplier: 0.5
+  posXThrust: 0
+  negXThrust: 0
+  posZThrust: 0
+  negZThrust: 0
 --- !u!54 &646827686365464766
 Rigidbody:
   m_ObjectHideFlags: 0

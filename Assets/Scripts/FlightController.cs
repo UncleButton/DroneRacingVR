@@ -11,12 +11,11 @@ public class FlightController : MonoBehaviour
     private Vector2 tiltAxis;
 
     public XRNode liftSpinInputController;
-    private float liftMultiplier;
-    private Vector2 spinAxis;
-    private bool restart;
+    private Vector2 liftSpinAxis;
+    public bool restart;
 
     public GameObject flightDeck;
-    private Transform flightDeckT;
+    public Transform flightDeckT;
     private Rigidbody flightDeckRB;
 
     public GameObject thrusterPosXNegZ;
@@ -35,11 +34,12 @@ public class FlightController : MonoBehaviour
     public float minimumThrust = 2.2f;
     public float stabilizationSpeed = 1f;
     public float spinMultiplier = 0.5f;
+    private float hoverThrust = 9.81f / 4f;
 
-    private float posXThrust = 0f;
-    private float negXThrust = 0f;
-    private float posZThrust = 0f;
-    private float negZThrust = 0f;
+    public float posXThrust = 0f;
+    public float negXThrust = 0f;
+    public float posZThrust = 0f;
+    public float negZThrust = 0f;
 
 
     // Start is called before the first frame update
@@ -61,8 +61,7 @@ public class FlightController : MonoBehaviour
         tiltDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out tiltAxis);
 
         InputDevice liftSpinDevice = InputDevices.GetDeviceAtXRNode(liftSpinInputController);
-        liftSpinDevice.TryGetFeatureValue(CommonUsages.trigger, out liftMultiplier);
-        liftSpinDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out spinAxis);
+        liftSpinDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out liftSpinAxis);
         liftSpinDevice.TryGetFeatureValue(CommonUsages.primaryButton, out restart);
 
         posXThrust = 0f;
@@ -87,12 +86,12 @@ public class FlightController : MonoBehaviour
         }
 
         //spinning
-        if (Mathf.Abs(spinAxis.x) > 0.1)
-            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + spinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
+        if (Mathf.Abs(liftSpinAxis.x) > 0.1)
+            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
-        //lift based on lift trigger
-        masterThrust = liftMultiplier * masterThrustCopy;
-
+        //lift based on lift joystick
+        masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
+        
         if (masterThrust < minimumThrust)
             masterThrust = minimumThrust;
 
@@ -104,9 +103,9 @@ public class FlightController : MonoBehaviour
 
         if (restart)
         {
-            this.transform.position = new Vector3(0, 3, 0);
-            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            SceneManager.LoadScene("SampleScene");
+            flightDeckT.position = new Vector3(0, 3, 0);
+            flightDeckT.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            SceneManager.LoadScene("Demo Scene");
         }
     }
 
