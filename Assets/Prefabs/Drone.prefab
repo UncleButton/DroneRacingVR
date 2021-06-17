@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383547792847262273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.837, z: 0}
+  m_LocalPosition: {x: 0, y: 0.469, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8175815140732539827}
@@ -411,7 +411,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5891055625034425665}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3b1cda223fbf7e044b187deff6eb9761, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -706,16 +706,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiltInputController: 4
   liftSpinInputController: 5
+  restart: 0
   flightDeck: {fileID: 7595346355503362250}
+  flightDeckT: {fileID: 0}
   thrusterPosXNegZ: {fileID: 8988721000632983077}
   thrusterNegXNegZ: {fileID: 7914599981096584143}
   thrusterPosXPosZ: {fileID: 3178050152862741818}
   thrusterNegXPosZ: {fileID: 5967220047639142528}
+  tiltIsClamped: 0
   masterThrust: 5
   correctionThrust: 0.1
   minimumThrust: 0
   stabilizationSpeed: 0.5
   spinMultiplier: 0.5
+  hoverThrust: 2.4525
+  tiltLerpSpeed: 2
+  tiltMaxAngle: 30
+  tiltDeadzone: 0.1
+  spinDeadzone: 0.1
   posXThrust: 0
   negXThrust: 0
   posZThrust: 0
@@ -808,6 +816,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thruster +X+Z
       objectReference: {fileID: 0}
+    - target: {fileID: 6431300884618875440, guid: 6f52a4c4811c7b84c87deae2d56090ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3b1cda223fbf7e044b187deff6eb9761,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f52a4c4811c7b84c87deae2d56090ac, type: 3}
 --- !u!1 &3178050152862741818 stripped
@@ -980,6 +994,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thruster +X-Z
       objectReference: {fileID: 0}
+    - target: {fileID: 6431300884618875440, guid: 6f52a4c4811c7b84c87deae2d56090ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3b1cda223fbf7e044b187deff6eb9761,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f52a4c4811c7b84c87deae2d56090ac, type: 3}
 --- !u!4 &6721798749205210551 stripped
@@ -1066,6 +1086,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thruster -X+Z
       objectReference: {fileID: 0}
+    - target: {fileID: 6431300884618875440, guid: 6f52a4c4811c7b84c87deae2d56090ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3b1cda223fbf7e044b187deff6eb9761,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f52a4c4811c7b84c87deae2d56090ac, type: 3}
 --- !u!4 &8302713009139538706 stripped

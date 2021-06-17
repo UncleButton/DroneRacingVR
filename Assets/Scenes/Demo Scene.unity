@@ -121,6 +121,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &73123715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3178050152862741818, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174794768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &119314884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7595346355503362250, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174794768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &119314887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119314884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b397fb47b308134db13b5e40dccdc95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flightDeck: {fileID: 119314884}
+  flightDeckT: {fileID: 0}
+  thrusterPosXNegZ: {fileID: 1054893187}
+  thrusterNegXNegZ: {fileID: 1812042049}
+  thrusterPosXPosZ: {fileID: 73123715}
+  thrusterNegXPosZ: {fileID: 529666774}
+  masterThrust: 2.2
+  correctionThrust: 0.5
+  minimumThrust: 2.2
+  stabilizationSpeed: 2
+  spinPerFrame: 0.5
+  hoverThrust: 2.4525
+  tiltLerpSpeed: 2
+  tiltMaxAngle: 30
+  posXThrust: 0
+  negXThrust: 0
+  posZThrust: 0
+  negZThrust: 0
 --- !u!1 &285603798
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +242,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8187003389095064048, guid: 89e1c8d85e09b3b4297d2364dd880a0f,
     type: 3}
   m_PrefabInstance: {fileID: 919035633732109225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &529666774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5967220047639142528, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174794768}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
@@ -299,7 +347,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-12112
+  m_Name: pb_Mesh-104734
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -462,7 +510,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-12040
+  m_Name: pb_Mesh-104608
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -744,13 +792,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e1c8d85e09b3b4297d2364dd880a0f, type: 3}
+--- !u!1 &1054893187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8988721000632983077, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174794768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1055969385
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-12116
+  m_Name: pb_Mesh-104748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -925,7 +979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1138413982
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1013,6 +1067,16 @@ PrefabInstance:
       propertyPath: thrustRB
       value: 
       objectReference: {fileID: 1982084236}
+    - target: {fileID: 646827686365464766, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_Drag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 646827686365464766, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1193971500289657477, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: thrustRB
@@ -1028,11 +1092,26 @@ PrefabInstance:
       propertyPath: thrustRB
       value: 
       objectReference: {fileID: 1982084236}
+    - target: {fileID: 4535732137694926652, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4626673626759061914, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: thrustRB
       value: 
       objectReference: {fileID: 1982084236}
+    - target: {fileID: 6722389342748067604, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722389342748067604, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: hoverThrust
+      value: 2.4525
+      objectReference: {fileID: 0}
     - target: {fileID: 6722389342748067604, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: minimumThrust
@@ -1294,7 +1373,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5416
+  m_Name: pb_Mesh-104762
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1510,7 +1589,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-12044
+  m_Name: pb_Mesh-104594
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1667,6 +1746,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1812042049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7914599981096584143, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174794768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1879432454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1798,7 +1883,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8608
+  m_Name: pb_Mesh-104776
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
