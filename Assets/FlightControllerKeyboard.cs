@@ -57,15 +57,6 @@ public class FlightControllerKeyboard : MonoBehaviour
         negZThrust = 0f;
 
         //tilting left/right/forward/backward
-        /*if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["d"]).isPressed)
-            negXThrust = correctionThrust;
-        if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["a"]).isPressed)
-            posXThrust = correctionThrust;
-        if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["w"]).isPressed)
-            negZThrust = correctionThrust;
-        if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["s"]).isPressed)
-            posZThrust = correctionThrust;*/
-
         if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["w"]).isPressed)
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
         else if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current["s"]).isPressed)
