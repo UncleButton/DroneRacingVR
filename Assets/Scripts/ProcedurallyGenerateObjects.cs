@@ -13,6 +13,7 @@ public class ProcedurallyGenerateObjects : MonoBehaviour
     public float minScale;
     public float maxScale;
 
+    public bool giveRandomMat = true;
     public Material basicPlanetMaterial;
 
     void Start()
@@ -30,12 +31,17 @@ public class ProcedurallyGenerateObjects : MonoBehaviour
         float size = Random.Range(minScale, maxScale);
         clone.transform.localScale = new Vector3(size, size, size);
         clone.transform.rotation = Quaternion.Euler(new Vector3(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180)));
-        Material mat = Instantiate(basicPlanetMaterial);
-        mat.SetColor("_Color", Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
-        mat.SetFloat("_Metallic", Random.Range(0, 1));
-        mat.SetFloat("_Glossiness", Random.Range(0, 1));
-        clone.GetComponent<MeshRenderer>().material = mat;
         clone.transform.SetParent(this.transform);
+        if (giveRandomMat)
+        {
+            Material mat = Instantiate(basicPlanetMaterial);
+            mat.SetColor("_Color", Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
+            mat.SetFloat("_Metallic", Random.Range(0, 1));
+            mat.SetFloat("_Glossiness", Random.Range(0, 1));
+            clone.GetComponent<MeshRenderer>().material = mat;
+        }
+        
+        
     }
 
 }

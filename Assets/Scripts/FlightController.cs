@@ -40,6 +40,7 @@ public class FlightController : MonoBehaviour
     public float tiltMaxAngle = 30f;
     public float tiltDeadzone = 0.1f;
     public float spinDeadzone = 0.1f;
+    public float liftDeadzone = 0.1f;
 
     public float posXThrust = 0f;
     public float negXThrust = 0f;
@@ -85,20 +86,29 @@ public class FlightController : MonoBehaviour
                 negZThrust = tiltAxis.y * correctionThrust;
             if (tiltAxis.y < -tiltDeadzone)
                 posZThrust = -tiltAxis.y * correctionThrust;
+
+            masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
+
+            if (masterThrust < minimumThrust)
+                masterThrust = minimumThrust;
         }
         else
         {
-            if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
-                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.x, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
-            //if (tiltAxis.x < 0)
-                //flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.x, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
             if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
-                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, tiltMaxAngle * tiltAxis.y), Time.deltaTime * tiltLerpSpeed);
-            //if (tiltAxis.y < 0)
-                //flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, tiltMaxAngle * tiltAxis.y), Time.deltaTime * tiltLerpSpeed);
+                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
+            
+            if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
+                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
+
+            //lift based on lift joystick
+            if (liftSpinAxis.y >= liftDeadzone)
+                masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
+            else
+                masterThrust = 0f;
+
         }
 
-        
+
 
         //if not controlling, level out
         if (tiltAxis.x < tiltDeadzone && tiltAxis.x > -tiltDeadzone && tiltAxis.y < tiltDeadzone && tiltAxis.y > -tiltDeadzone)
@@ -110,11 +120,7 @@ public class FlightController : MonoBehaviour
         if (Mathf.Abs(liftSpinAxis.x) > spinDeadzone)
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
-        //lift based on lift joystick
-        masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
         
-        if (masterThrust < minimumThrust)
-            masterThrust = minimumThrust;
 
         //do thrust after all the above calculations
         thrusterPosXPosZThrust.force = (masterThrust + posXThrust + posZThrust) * flightDeckRB.mass;
