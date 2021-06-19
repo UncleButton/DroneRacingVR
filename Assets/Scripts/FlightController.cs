@@ -5,6 +5,8 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
 using MLAPI;
+using MLAPI.NetworkVariable;
+using MLAPI.Messaging;
 
 public class FlightController : NetworkBehaviour
 {
@@ -49,9 +51,8 @@ public class FlightController : NetworkBehaviour
     public float posZThrust = 0f;
     public float negZThrust = 0f;
 
-
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         if (IsLocalPlayer)
         {
@@ -71,6 +72,19 @@ public class FlightController : NetworkBehaviour
             cameraTransform.GetComponent<Camera>().enabled = false;
             this.tag = "EnemyPlayer";
         }
+        
+        Vector3 positionToSpwan = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().position;
+        Quaternion rotationToSpawn = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().rotation;
+        SpawnClientRPC(positionToSpwan, rotationToSpawn);
+    }
+
+    [ClientRpc]
+    void SpawnClientRPC(Vector3 position, Quaternion rotation)
+    {
+        this.gameObject.SetActive(false);
+        this.transform.position = position;
+        this.transform.rotation = rotation;
+        this.gameObject.SetActive(true);
     }
 
     private void FixedUpdate()
