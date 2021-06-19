@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using MLAPI;
 
-public class FlightControllerKeyboard : MonoBehaviour
+public class FlightControllerKeyboard : NetworkBehaviour
 {
 
     public GameObject flightDeck;
     public Transform flightDeckT;
     private Rigidbody flightDeckRB;
+    public Transform cameraTransform;
 
     public GameObject thrusterPosXNegZ;
     public GameObject thrusterNegXNegZ;
@@ -38,18 +40,36 @@ public class FlightControllerKeyboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
-        thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
-        thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
-        thrusterNegXPosZThrust = thrusterNegXPosZ.GetComponent<ThrustScript>();
-        masterThrustCopy = masterThrust;
+        if (IsLocalPlayer)
+        {
+            thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
+            thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
+            thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
+            thrusterNegXPosZThrust = thrusterNegXPosZ.GetComponent<ThrustScript>();
+            masterThrustCopy = masterThrust;
 
-        flightDeckRB = flightDeck.GetComponent<Rigidbody>();
-        flightDeckT = flightDeck.transform;
+            flightDeckRB = flightDeck.GetComponent<Rigidbody>();
+            flightDeckT = flightDeck.transform;
+        }
+        else
+        {
+            cameraTransform.GetComponent<AudioListener>().enabled = false;
+            cameraTransform.GetComponent<Camera>().enabled = false;
+        }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
+    {
+        if (IsLocalPlayer)
+        {
+            droneMovement();
+        }
+            
+    }
+
+    void droneMovement()
     {
         posXThrust = 0f;
         negXThrust = 0f;
@@ -84,7 +104,7 @@ public class FlightControllerKeyboard : MonoBehaviour
         //spinning
         if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current[KeyCode.RightArrow.ToString()]).isPressed)
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + spinPerFrame, flightDeckT.rotation.eulerAngles.z);
-        
+
         if (((UnityEngine.InputSystem.Controls.KeyControl)Keyboard.current[KeyCode.LeftArrow.ToString()]).isPressed)
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y - spinPerFrame, flightDeckT.rotation.eulerAngles.z);
 

@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
+using MLAPI;
 
-public class FlightController : MonoBehaviour
+public class FlightController : NetworkBehaviour
 {
     public XRNode tiltInputController;
     private Vector2 tiltAxis;
@@ -17,6 +18,7 @@ public class FlightController : MonoBehaviour
     public GameObject flightDeck;
     public Transform flightDeckT;
     private Rigidbody flightDeckRB;
+    public Transform cameraTransform;
 
     public GameObject thrusterPosXNegZ;
     public GameObject thrusterNegXNegZ;
@@ -51,17 +53,31 @@ public class FlightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
-        thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
-        thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
-        thrusterNegXPosZThrust = thrusterNegXPosZ.GetComponent<ThrustScript>();
-        masterThrustCopy = masterThrust;
+        if (IsLocalPlayer)
+        {
+            thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
+            thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
+            thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
+            thrusterNegXPosZThrust = thrusterNegXPosZ.GetComponent<ThrustScript>();
+            masterThrustCopy = masterThrust;
 
-        flightDeckRB = flightDeck.GetComponent<Rigidbody>();
-        flightDeckT = flightDeck.transform;
+            flightDeckRB = flightDeck.GetComponent<Rigidbody>();
+            flightDeckT = flightDeck.transform;
+        }
+        else
+        {
+            cameraTransform.GetComponent<AudioListener>().enabled = false;
+            cameraTransform.GetComponent<Camera>().enabled = false;
+        }
     }
 
     private void FixedUpdate()
+    {
+        if (IsLocalPlayer)
+            DroneMovement();
+    }
+
+    void DroneMovement()
     {
         InputDevice tiltDevice = InputDevices.GetDeviceAtXRNode(tiltInputController);
         tiltDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out tiltAxis);
@@ -96,7 +112,7 @@ public class FlightController : MonoBehaviour
         {
             if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
                 flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
-            
+
             if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
                 flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
 
@@ -120,7 +136,7 @@ public class FlightController : MonoBehaviour
         if (Mathf.Abs(liftSpinAxis.x) > spinDeadzone)
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
-        
+
 
         //do thrust after all the above calculations
         thrusterPosXPosZThrust.force = (masterThrust + posXThrust + posZThrust) * flightDeckRB.mass;

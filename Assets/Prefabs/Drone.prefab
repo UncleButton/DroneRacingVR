@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8175815140732539827}
   - component: {fileID: 4648577161110008870}
   - component: {fileID: 9085851241061432734}
+  - component: {fileID: 7374446816851445236}
   m_Layer: 0
   m_Name: VR Camera
   m_TagString: Untagged
@@ -63,6 +64,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1674579136471914880}
+  - {fileID: 3105399816503565812}
   m_Father: {fileID: 4535732137694926652}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -127,6 +129,14 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
+--- !u!81 &7374446816851445236
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525117489464663363}
+  m_Enabled: 1
 --- !u!1 &1602351675535183848
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +228,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
+  m_ModelPrefab: {fileID: 720295014068267704, guid: e7b06dd88893e8b4eb4865d15d5c0622,
+    type: 3}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -321,6 +332,85 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5890612479180908790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3105399816503565812}
+  - component: {fileID: 4077999271946330439}
+  - component: {fileID: 2421702761271957934}
+  m_Layer: 0
+  m_Name: nose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3105399816503565812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890612479180908790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.4, z: 0.3}
+  m_Children: []
+  m_Father: {fileID: 8175815140732539827}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4077999271946330439
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890612479180908790}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2421702761271957934
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890612479180908790}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &5891055625034425665
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +422,6 @@ GameObject:
   - component: {fileID: 8194173825310002264}
   - component: {fileID: 3255600254098299815}
   - component: {fileID: 7576304073119087577}
-  - component: {fileID: 58670091822235133}
   m_Layer: 0
   m_Name: Drone Body
   m_TagString: Untagged
@@ -405,19 +494,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &58670091822235133
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5891055625034425665}
-  m_Material: {fileID: 13400000, guid: 3b1cda223fbf7e044b187deff6eb9761, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6887520242524973897
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +631,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
+  m_ModelPrefab: {fileID: 720295014068267704, guid: e7b06dd88893e8b4eb4865d15d5c0622,
+    type: 3}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -669,6 +746,10 @@ GameObject:
   - component: {fileID: 8536962405574827010}
   - component: {fileID: 6722389342748067604}
   - component: {fileID: 646827686365464766}
+  - component: {fileID: 812888197557762540}
+  - component: {fileID: 2787096210624968706}
+  - component: {fileID: 2744913600411918653}
+  - component: {fileID: 3959909029433672704}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -705,27 +786,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da33409665cc7df46bb9bbade7a4295e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltInputController: 4
-  liftSpinInputController: 5
+  tiltInputController: 5
+  liftSpinInputController: 4
   restart: 0
   flightDeck: {fileID: 7595346355503362250}
   flightDeckT: {fileID: 0}
+  cameraTransform: {fileID: 8175815140732539827}
   thrusterPosXNegZ: {fileID: 8988721000632983077}
   thrusterNegXNegZ: {fileID: 7914599981096584143}
   thrusterPosXPosZ: {fileID: 3178050152862741818}
   thrusterNegXPosZ: {fileID: 5967220047639142528}
-  tiltIsClamped: 0
-  masterThrust: 5
+  tiltIsClamped: 1
+  masterThrust: 2
   correctionThrust: 0.1
   minimumThrust: 0
-  stabilizationSpeed: 0.5
-  spinMultiplier: 0.5
+  stabilizationSpeed: 1
+  spinMultiplier: 1
   hoverThrust: 2.4525
   tiltLerpSpeed: 2
-  tiltMaxAngle: 30
+  tiltMaxAngle: 45
   tiltDeadzone: 0.1
   spinDeadzone: 0.1
-  liftDeadzone: 0.1
+  liftDeadzone: 0
   posXThrust: 0
   negXThrust: 0
   posZThrust: 0
@@ -739,13 +821,122 @@ Rigidbody:
   m_GameObject: {fileID: 7595346355503362250}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 5
-  m_AngularDrag: 0.05
+  m_Drag: 0.5
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &812888197557762540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595346355503362250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 13982722057793822801
+  PrefabHashGenerator: Drone
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+--- !u!114 &2787096210624968706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595346355503362250}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b397fb47b308134db13b5e40dccdc95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flightDeck: {fileID: 7595346355503362250}
+  flightDeckT: {fileID: 0}
+  cameraTransform: {fileID: 8175815140732539827}
+  thrusterPosXNegZ: {fileID: 8988721000632983077}
+  thrusterNegXNegZ: {fileID: 7914599981096584143}
+  thrusterPosXPosZ: {fileID: 3178050152862741818}
+  thrusterNegXPosZ: {fileID: 5967220047639142528}
+  masterThrust: 2.2
+  correctionThrust: 0.2
+  minimumThrust: 2.2
+  stabilizationSpeed: 1
+  spinPerFrame: 0.5
+  hoverThrust: 2.4525
+  tiltLerpSpeed: 2
+  tiltMaxAngle: 30
+  posXThrust: 0
+  negXThrust: 0
+  posZThrust: 0
+  negZThrust: 0
+--- !u!114 &2744913600411918653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595346355503362250}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FixedSendsPerSecond: 20
+  AssumeSyncedSends: 1
+  InterpolatePosition: 1
+  SnapDistance: 10
+  InterpolateServer: 1
+  MinMeters: 0.025
+  MinDegrees: 0.1
+  ExtrapolatePosition: 0
+  MaxSendsToExtrapolate: 5
+  Channel: 
+  EnableRange: 0
+  EnableNonProvokedResendChecks: 0
+  DistanceSendrate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 500
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!65 &3959909029433672704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595346355503362250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.28, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7704409433360972170
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,9 +948,9 @@ GameObject:
   - component: {fileID: 1674579136471914880}
   - component: {fileID: 509258388494695631}
   - component: {fileID: 2070520764019556836}
-  - component: {fileID: 2383922126620380962}
+  - component: {fileID: 3349501716297053623}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,19 +1017,54 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2383922126620380962
-SphereCollider:
+--- !u!114 &3349501716297053623
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7704409433360972170}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FixedSendsPerSecond: 20
+  AssumeSyncedSends: 1
+  InterpolatePosition: 1
+  SnapDistance: 10
+  InterpolateServer: 1
+  MinMeters: 0.15
+  MinDegrees: 1.5
+  ExtrapolatePosition: 0
+  MaxSendsToExtrapolate: 5
+  Channel: 
+  EnableRange: 0
+  EnableNonProvokedResendChecks: 0
+  DistanceSendrate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 500
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &442855206512326272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1005,15 +1231,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f52a4c4811c7b84c87deae2d56090ac, type: 3}
---- !u!4 &5485583111406975069 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 849244953304578088, guid: 6f52a4c4811c7b84c87deae2d56090ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 5181860930338177141}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7914599981096584143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3044404418827715514, guid: 6f52a4c4811c7b84c87deae2d56090ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 5181860930338177141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5485583111406975069 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 849244953304578088, guid: 6f52a4c4811c7b84c87deae2d56090ac,
     type: 3}
   m_PrefabInstance: {fileID: 5181860930338177141}
   m_PrefabAsset: {fileID: 0}
