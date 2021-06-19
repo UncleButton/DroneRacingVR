@@ -148,7 +148,7 @@ public class FlightController : NetworkBehaviour
         {
             flightDeckT.position = new Vector3(0, 3, 0);
             flightDeckT.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            SceneManager.LoadScene("Demo Scene");
+            //SceneManager.LoadScene("Demo Scene");
         }
     }
 
