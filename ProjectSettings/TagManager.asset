@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Checkpoint
   - CheckpointManager
+  - EnemyPlayer
   layers:
   - Default
   - TransparentFX

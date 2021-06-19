@@ -50,11 +50,13 @@ public class FlightControllerKeyboard : NetworkBehaviour
 
             flightDeckRB = flightDeck.GetComponent<Rigidbody>();
             flightDeckT = flightDeck.transform;
+            this.tag = "Player";
         }
         else
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
+            this.tag = "EnemyPlayer";
         }
         
     }
