@@ -7,13 +7,13 @@ public class MenuScript : MonoBehaviour
 {
     public GameObject menuPanel;
     public GameObject menuVRRig;
-    
+
     public void Host()
     {
         NetworkManager.Singleton.StartHost();
         menuPanel.SetActive(false);
         menuVRRig.SetActive(false);
-}
+    }
 
     public void Join()
     {
