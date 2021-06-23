@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using MLAPI;
 
 public class MenuScript : MonoBehaviour
 {
     public GameObject menuPanel;
     public GameObject menuVRRig;
 
-    public void PlayOnline()
+    public void Host()
     {
-        SceneManager.LoadScene("Demo Scene");
+        NetworkManager.Singleton.StartHost();
+        menuPanel.SetActive(false);
+        menuVRRig.SetActive(false);
     }
 
-    public void Training()
+    public void Join()
     {
-        SceneManager.LoadScene("Training");
-    }
-
-    public void Garage()
-    {
-        SceneManager.LoadScene("Garage");
+        NetworkManager.Singleton.StartClient();
+        menuPanel.SetActive(false);
+        menuVRRig.SetActive(false);
     }
 
 }
