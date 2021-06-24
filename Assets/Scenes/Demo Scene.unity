@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1947149789}
         m_MethodName: Join
         m_Mode: 1
         m_Arguments:
@@ -7347,6 +7347,7 @@ MonoBehaviour:
     RegisteredScenes:
     - Demo Scene
     - Menu
+    - Training
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 7595346355503362250, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
@@ -7484,7 +7485,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1947149789}
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
