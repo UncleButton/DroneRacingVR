@@ -11,7 +11,9 @@ public class FlightControllerSinglePlayer : MonoBehaviour
 
     public XRNode liftSpinInputController;
     private Vector2 liftSpinAxis;
-    public bool restart;
+    public bool settingsOn;
+
+    public GameObject settingsMenu;
 
     public GameObject flightDeck;
     public Transform flightDeckT;
@@ -76,7 +78,10 @@ public class FlightControllerSinglePlayer : MonoBehaviour
 
         InputDevice liftSpinDevice = InputDevices.GetDeviceAtXRNode(liftSpinInputController);
         liftSpinDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out liftSpinAxis);
-        liftSpinDevice.TryGetFeatureValue(CommonUsages.primaryButton, out restart);
+        liftSpinDevice.TryGetFeatureValue(CommonUsages.menuButton, out settingsOn);
+
+        if (settingsOn)
+            settingsMenu.GetComponent<SettingsPanel>().settingsOpen = true;
 
         posXThrust = 0f;
         negXThrust = 0f;
@@ -136,11 +141,5 @@ public class FlightControllerSinglePlayer : MonoBehaviour
         thrusterPosXNegZThrust.force = (masterThrust + posXThrust + negZThrust) * flightDeckRB.mass;
         thrusterNegXPosZThrust.force = (masterThrust + negXThrust + posZThrust) * flightDeckRB.mass;
 
-        if (restart)
-        {
-            flightDeckT.position = new Vector3(0, 14, 42);
-            flightDeckT.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            //SceneManager.LoadScene("Demo Scene");
-        }
     }
 }
