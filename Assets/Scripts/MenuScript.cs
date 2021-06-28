@@ -15,7 +15,7 @@ public class MenuScript : MonoBehaviour
 
     public void Training()
     {
-        SceneManager.LoadScene("Training");
+        SceneManager.LoadScene("Downtown Scene");
     }
 
     public void Garage()
