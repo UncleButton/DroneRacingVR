@@ -3236,6 +3236,7 @@ GameObject:
   - component: {fileID: 812888197557762540}
   - component: {fileID: 2744913600411918653}
   - component: {fileID: 3959909029433672704}
+  - component: {fileID: 6856087985301302872}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Player
@@ -3392,8 +3393,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.28, z: 2}
+  m_Size: {x: 1.4, y: 0.28, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6856087985301302872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7595346355503362250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.56, z: 0}
 --- !u!1 &7704409433360972170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3990,15 +4004,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9e740ec256c8a5c4782b4dfe4aab79d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f52a4c4811c7b84c87deae2d56090ac, type: 3}
---- !u!1 &7914599981096584143 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3044404418827715514, guid: 6f52a4c4811c7b84c87deae2d56090ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 5181860930338177141}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5485583111406975069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 849244953304578088, guid: 6f52a4c4811c7b84c87deae2d56090ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 5181860930338177141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7914599981096584143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3044404418827715514, guid: 6f52a4c4811c7b84c87deae2d56090ac,
     type: 3}
   m_PrefabInstance: {fileID: 5181860930338177141}
   m_PrefabAsset: {fileID: 0}
