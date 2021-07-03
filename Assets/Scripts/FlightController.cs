@@ -24,6 +24,8 @@ public class FlightController : NetworkBehaviour
     private Rigidbody flightDeckRB;
     public Transform cameraTransform;
 
+    public AudioSource droneSound;
+
     public GameObject thrusterPosXNegZ;
     public GameObject thrusterNegXNegZ;
     public GameObject thrusterPosXPosZ;
@@ -91,6 +93,7 @@ public class FlightController : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        droneSound.pitch = 1f + liftSpinAxis.y/1.5f;
         if (IsLocalPlayer)
             DroneMovement();
     }
@@ -106,6 +109,7 @@ public class FlightController : NetworkBehaviour
 
         if (settingsOn)
             settingsMenu.GetComponent<SettingsPanel>().settingsOpen = true;
+
 
         posXThrust = 0f;
         negXThrust = 0f;
@@ -139,9 +143,15 @@ public class FlightController : NetworkBehaviour
 
             //lift based on lift joystick
             if (liftSpinAxis.y >= liftDeadzone)
+            {
                 masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
+                droneSound.enabled = true;
+            }
             else
+            {
                 masterThrust = 0f;
+                droneSound.pitch = 0.8f;
+            }
 
         }
 

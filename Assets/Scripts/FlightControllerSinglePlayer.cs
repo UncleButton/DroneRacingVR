@@ -20,6 +20,8 @@ public class FlightControllerSinglePlayer : MonoBehaviour
     private Rigidbody flightDeckRB;
     public Transform cameraTransform;
 
+    public AudioSource droneSound;
+
     public GameObject thrusterPosXNegZ;
     public GameObject thrusterNegXNegZ;
     public GameObject thrusterPosXPosZ;
@@ -67,6 +69,7 @@ public class FlightControllerSinglePlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        droneSound.pitch = 1f + liftSpinAxis.y / 1.5f;
         DroneMovement();
     }
 
@@ -94,9 +97,13 @@ public class FlightControllerSinglePlayer : MonoBehaviour
         if (liftSpinAxis.y >= liftDeadzone)
             masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
         else
+        {
             masterThrust = 0f;
+            droneSound.pitch = 0.8f;
+        }
 
-            
+
+
         //if not controlling, level out
         if (tiltAxis.x < tiltDeadzone && tiltAxis.x > -tiltDeadzone && tiltAxis.y < tiltDeadzone && tiltAxis.y > -tiltDeadzone)
         {
