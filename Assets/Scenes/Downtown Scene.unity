@@ -53740,6 +53740,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3247774529069446884, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3900474381326016311, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -53830,6 +53835,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7614826817460552148, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614826817460552148, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 8070431782759954689, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -53868,12 +53883,12 @@ PrefabInstance:
     - target: {fileID: 8536962405574827010, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.14150617
       objectReference: {fileID: 0}
     - target: {fileID: 8536962405574827010, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.9899374
       objectReference: {fileID: 0}
     - target: {fileID: 8536962405574827010, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
@@ -53888,7 +53903,7 @@ PrefabInstance:
     - target: {fileID: 8536962405574827010, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -163.73
       objectReference: {fileID: 0}
     - target: {fileID: 8536962405574827010, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
         type: 3}
