@@ -143,10 +143,7 @@ public class FlightController : NetworkBehaviour
 
             //lift based on lift joystick
             if (liftSpinAxis.y >= liftDeadzone)
-            {
                 masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
-                droneSound.enabled = true;
-            }
             else
             {
                 masterThrust = 0f;
