@@ -93,7 +93,7 @@ public class FlightControllerSinglePlayer : MonoBehaviour
         if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
         {
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
-            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + tiltAxis.x * spinMultiplier / 2, flightDeckT.rotation.eulerAngles.z);
+            //flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + tiltAxis.x * spinMultiplier / 2, flightDeckT.rotation.eulerAngles.z);
         }
             
 
@@ -116,7 +116,7 @@ public class FlightControllerSinglePlayer : MonoBehaviour
 
         //spinning
         if (Mathf.Abs(liftSpinAxis.x) > spinDeadzone)
-            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier/2, flightDeckT.rotation.eulerAngles.z);
+            flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier/1, flightDeckT.rotation.eulerAngles.z);
 
 
 

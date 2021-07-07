@@ -18,9 +18,9 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene("Downtown Scene");
     }
 
-    public void Garage()
+    public void Tutorial()
     {
-        SceneManager.LoadScene("Garage");
+        SceneManager.LoadScene("Tutorial");
     }
 
 }

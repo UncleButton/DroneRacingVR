@@ -26,6 +26,8 @@ public class FlightController : NetworkBehaviour
 
     public AudioSource droneSound;
 
+    public Canvas playerName;
+
     public GameObject thrusterPosXNegZ;
     public GameObject thrusterNegXNegZ;
     public GameObject thrusterPosXPosZ;
@@ -68,6 +70,7 @@ public class FlightController : NetworkBehaviour
 
             flightDeckRB = flightDeck.GetComponent<Rigidbody>();
             flightDeckT = flightDeck.transform;
+            playerName.enabled = false;
             this.tag = "Player";
         }
         else

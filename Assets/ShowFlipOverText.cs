@@ -15,5 +15,4 @@ public class ShowFlipOverText : MonoBehaviour
          else
             flipOverText.enabled = false;
     }
-
 }

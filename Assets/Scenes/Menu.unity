@@ -187,6 +187,7 @@ MonoBehaviour:
     - Menu
     - Training
     - Downtown Scene
+    - Tutorial
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 7595346355503362250, guid: 4f83bfd006f4ceb498fd0b6e44fa7344,
@@ -1236,7 +1237,7 @@ GameObject:
   - component: {fileID: 1107690885}
   - component: {fileID: 1107690884}
   m_Layer: 5
-  m_Name: Garage
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1307,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 367002306}
-        m_MethodName: Garage
+        m_MethodName: Tutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2270,7 +2271,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Garage
+  m_Text: Tutorial
 --- !u!222 &1539782128
 CanvasRenderer:
   m_ObjectHideFlags: 0
