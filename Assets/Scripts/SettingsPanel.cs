@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class SettingsPanel : MonoBehaviour
 {
@@ -15,34 +14,50 @@ public class SettingsPanel : MonoBehaviour
     private FlightController flightController = null;
     private FlightControllerSinglePlayer flightControllerSinglePlayer = null;
 
+    public GameObject tracers;
+
     private void Start()
     {
-        if (drone.GetComponent<FlightController>() != null)
-            flightController = drone.GetComponent<FlightController>();
-        else
-            flightControllerSinglePlayer = drone.GetComponent<FlightControllerSinglePlayer>();
+        flightController = drone.GetComponent<FlightController>();
+        tracers = GameObject.FindGameObjectWithTag("Tracers");
     }
 
-    void Update()
+    public void setInactive()
     {
-        if (settingsOpen)
-        {
-            gameVRRig.SetActive(false);
-            settingsVRRig.SetActive(true);
-            if (flightController != null)
-                flightController.enabled = false;
-            else
-                flightControllerSinglePlayer.enabled = false;
-        }
-        else
-        {
-            if (flightController != null)
-                flightController.enabled = true;
-            else
-                flightControllerSinglePlayer.enabled = true;
-            settingsVRRig.SetActive(false);
-            gameVRRig.SetActive(true);
-        }
-
+        Time.timeScale = 1;
+        flightController.enabled = true;
+        settingsVRRig.SetActive(false);
+        gameVRRig.SetActive(true);
     }
+
+    public void setActive()
+    {
+        Time.timeScale = 0;
+        gameVRRig.SetActive(false);
+        settingsVRRig.SetActive(true);
+        flightController.enabled = false;
+    }
+
+    public void loadGarage()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Garage");
+    }
+
+    public void toggleTracers()
+    {
+        tracers.SetActive(!tracers.activeSelf);
+    }
+
+    public void toggleElevationStabilization()
+    {
+        flightController.elevationStabilization = !flightController.elevationStabilization;
+    }
+
+    public void ExitSettings()
+    {
+        //settingsOpen = false;
+    }
+
+
 }

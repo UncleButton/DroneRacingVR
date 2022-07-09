@@ -5,9 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - Checkpoint
-  - CheckpointManager
   - EnemyPlayer
   - SpawnManager
+  - Timer
+  - LapManager
+  - Tracers
+  - TimeTrialBoard
+  - CheckpointManager
+  - PropPlaceholder
+  - DroneBuilder
+  - DroneBuilderBoard
+  - DroneBuilderManager
+  - BuiltDrone
+  - ItemPanel
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
@@ -18,7 +29,7 @@ TagManager:
   - 
   - 
   - Grab
-  - 
+  - Lights
   - 
   - 
   - 

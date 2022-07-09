@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 using MLAPI;
 using MLAPI.NetworkVariable;
 using MLAPI.Messaging;
+using MLAPI.Serialization;
 
 public class FlightController : NetworkBehaviour
 {
+    private bool isNotNetworked;
+    public bool elevationStabilization = true;
     public XRNode tiltInputController;
     private Vector2 tiltAxis;
 
@@ -20,7 +23,7 @@ public class FlightController : NetworkBehaviour
     public GameObject settingsMenu;
 
     public GameObject flightDeck;
-    public Transform flightDeckT;
+    private Transform flightDeckT;
     private Rigidbody flightDeckRB;
     public Transform cameraTransform;
 
@@ -38,18 +41,16 @@ public class FlightController : NetworkBehaviour
     private ThrustScript thrusterPosXNegZThrust;
     private ThrustScript thrusterNegXPosZThrust;
 
-    public bool tiltIsClamped = false;
-    public float masterThrust = 2.2f;
+    public float masterThrust = 5f;
     private float masterThrustCopy;
-    public float correctionThrust = 0.2f;
     public float minimumThrust = 2.2f;
     public float stabilizationSpeed = 1f;
-    public float spinMultiplier = 0.5f;
-    public float hoverThrust = 9.81f / 4f;
+    public float spinMultiplier = 1.25f;
+    public float hoverThrust = 9.81f / 2f;
     public float tiltLerpSpeed = 2f;
-    public float tiltMaxAngle = 30f;
+    public float tiltMaxAngle = 40f;
     public float tiltDeadzone = 0.1f;
-    public float spinDeadzone = 0.1f;
+    public float spinDeadzone = 0.25f;
     public float liftDeadzone = 0.1f;
 
     public float posXThrust = 0f;
@@ -57,11 +58,20 @@ public class FlightController : NetworkBehaviour
     public float posZThrust = 0f;
     public float negZThrust = 0f;
 
+    public NetworkVariable<string[]> currentPreset = new NetworkVariable<string[]>(); 
+
     // Start is called before the first frame update
     public void Start()
     {
-        if (IsLocalPlayer)
+        currentPreset.Settings.WritePermission = NetworkVariablePermission.Everyone;
+        currentPreset.Settings.ReadPermission = NetworkVariablePermission.Everyone;
+        isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
+        if (IsLocalPlayer || isNotNetworked)
         {
+            DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
+            Debug.Log("Setting preset");
+            currentPreset.Value = dbScript.getPresets().data.Values[0].toArray();
+
             thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
             thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
             thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
@@ -97,7 +107,7 @@ public class FlightController : NetworkBehaviour
     private void FixedUpdate()
     {
         droneSound.pitch = 1f + liftSpinAxis.y/1.5f;
-        if (IsLocalPlayer)
+        if (IsLocalPlayer || isNotNetworked)
             DroneMovement();
     }
 
@@ -111,50 +121,32 @@ public class FlightController : NetworkBehaviour
         liftSpinDevice.TryGetFeatureValue(CommonUsages.menuButton, out settingsOn);
 
         if (settingsOn)
-            settingsMenu.GetComponent<SettingsPanel>().settingsOpen = true;
-
+            settingsMenu.GetComponent<SettingsPanel>().setActive();
 
         posXThrust = 0f;
         negXThrust = 0f;
         posZThrust = 0f;
         negZThrust = 0f;
 
-        //tilting left/right/forward/backward
-        if (!tiltIsClamped)
-        {
-            if (tiltAxis.x > tiltDeadzone)
-                negXThrust = tiltAxis.x * correctionThrust;
-            if (tiltAxis.x < -tiltDeadzone)
-                posXThrust = -tiltAxis.x * correctionThrust;
-            if (tiltAxis.y > tiltDeadzone)
-                negZThrust = tiltAxis.y * correctionThrust;
-            if (tiltAxis.y < -tiltDeadzone)
-                posZThrust = -tiltAxis.y * correctionThrust;
+        if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
+            flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
 
+        if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
+            flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
+
+        if (elevationStabilization)
+            hoverThrust = ((9.81f / 2f) / Mathf.Cos(Vector3.Angle(-flightDeckT.up, Vector3.down) * Mathf.Deg2Rad));
+        else
+            hoverThrust = (9.81f / 2f);
+
+        //lift based on lift joystick
+        if (liftSpinAxis.y >= liftDeadzone)
             masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
-
-            if (masterThrust < minimumThrust)
-                masterThrust = minimumThrust;
-        }
         else
         {
-            if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
-                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
-
-            if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
-                flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
-
-            //lift based on lift joystick
-            if (liftSpinAxis.y >= liftDeadzone)
-                masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
-            else
-            {
-                masterThrust = 0f;
-                droneSound.pitch = 0.8f;
-            }
-
+            masterThrust = 0f;
+            droneSound.pitch = 0.8f;
         }
-
 
 
         //if not controlling, level out
@@ -174,6 +166,11 @@ public class FlightController : NetworkBehaviour
         thrusterNegXNegZThrust.force = (masterThrust + negXThrust + negZThrust) * flightDeckRB.mass;
         thrusterPosXNegZThrust.force = (masterThrust + posXThrust + negZThrust) * flightDeckRB.mass;
         thrusterNegXPosZThrust.force = (masterThrust + negXThrust + posZThrust) * flightDeckRB.mass;
+
+        /*thrusterPosXNegZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
+        thrusterPosXPosZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
+        thrusterNegXNegZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
+        thrusterNegXPosZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;*/
 
     }
 
