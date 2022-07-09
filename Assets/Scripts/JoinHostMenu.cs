@@ -21,14 +21,14 @@ public class JoinHostMenu : MonoBehaviour
     public void Host()
     {
         NetworkManager.Singleton.StartHost();
-        menuPanel.SetActive(false);
-        menuVRRig.SetActive(false);
+        Destroy(menuPanel);
+        Destroy(menuVRRig);
     }
 
     public void Join()
     {
         NetworkManager.Singleton.StartClient();
-        menuPanel.SetActive(false);
-        menuVRRig.SetActive(false);
+        Destroy(menuPanel);
+        Destroy(menuVRRig);
     }
 }

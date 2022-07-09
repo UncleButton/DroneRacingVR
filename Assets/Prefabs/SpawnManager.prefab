@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawns:
+  - {fileID: 7060256801681252306}
   - {fileID: 7786105608440263767}
   - {fileID: 3255865525200277775}
   - {fileID: 9083357432740232978}

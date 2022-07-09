@@ -55,8 +55,14 @@ public class FlightController : NetworkBehaviour
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
-            this.tag = "EnemyPlayer";
+            this.transform.tag = "EnemyPlayer";
             Destroy(this);
+        }
+
+        if (!isNotNetworked)
+        {
+            Transform spawnLocation = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation();
+            SpawnClientRPC(spawnLocation.position, spawnLocation.rotation);
         }
 
         DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
@@ -67,11 +73,6 @@ public class FlightController : NetworkBehaviour
         flightDeckRB = flightDeck.GetComponent<Rigidbody>();
         flightDeckT = flightDeck.transform;
         playerName.enabled = false;
-        this.tag = "Player";
-
-        Vector3 positionToSpwan = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().position;
-        Quaternion rotationToSpawn = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().rotation;
-        SpawnClientRPC(positionToSpwan, rotationToSpawn);
     }
 
     [ClientRpc]
