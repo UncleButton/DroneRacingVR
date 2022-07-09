@@ -58,3 +58,11 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#I added these
+*packages-lock.json
+*Settings.json
+*.XRSettings.asset
+*PlayFabEditorExtensions.meta
+*Editor.meta
+*unitypackage.meta
+
