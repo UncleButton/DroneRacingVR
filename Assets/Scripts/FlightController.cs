@@ -47,18 +47,13 @@ public class FlightController : NetworkBehaviour
     public float spinDeadzone = 0.25f;
     public float liftDeadzone = 0.1f;
 
-    public NetworkVariable<string[]> currentPreset = new NetworkVariable<string[]>(); 
-
     // Start is called before the first frame update
     public void Start()
     {
-        currentPreset.Settings.WritePermission = NetworkVariablePermission.Everyone;
-        currentPreset.Settings.ReadPermission = NetworkVariablePermission.Everyone;
         isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
         if (IsLocalPlayer || isNotNetworked)
         {
             DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-            currentPreset.Value = dbScript.getPresets().data.Values[0].toArray();
 
             thrusterThrust = thruster.GetComponent<ThrustScript>();
 
@@ -74,6 +69,7 @@ public class FlightController : NetworkBehaviour
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
             this.tag = "EnemyPlayer";
+            Destroy(this);
         }
         
         Vector3 positionToSpwan = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().position;

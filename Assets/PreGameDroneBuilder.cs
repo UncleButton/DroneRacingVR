@@ -8,7 +8,7 @@ using MLAPI.Messaging;
 public class PreGameDroneBuilder : NetworkBehaviour
 {
     private bool isNotNetworked;
-    public Preset droneData;
+    public NetworkVariable<Preset> droneData = new NetworkVariable<Preset>();
     public GameObject parent;
     private DroneBuilderManager dbManager;
     private DroneBuilderScript dbScript;
@@ -16,30 +16,30 @@ public class PreGameDroneBuilder : NetworkBehaviour
 
     public void Start()
     {
+        droneData.Settings.WritePermission = NetworkVariablePermission.OwnerOnly;
         isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
         dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
         dbManager = new DroneBuilderManager();
         dbManager.dronePlacement = this.transform;
         if (IsLocalPlayer || isNotNetworked)
         {
-            SetPreset(dbScript.getPresets().data.Values[0]);
-        }
-        else
-        {
-            Debug.Log("Attempting build");
-            SetPreset(new Preset(parent.GetComponent<FlightController>().currentPreset.Value));
+            this.droneData.Value = dbScript.getPresets().data.Values[0];
         }
     }
 
-    public void SetPreset(Preset preset)
+    public void OnEnable()
     {
-        this.droneData = preset;
+        droneData.OnValueChanged += PresetChanged;
+    }
+
+    public void PresetChanged(Preset oldValue, Preset newValue)
+    {
         BuildDrone();
     }
 
     public void BuildDrone()
     {
-        drone = dbManager.visualizePreset(droneData);
+        drone = dbManager.visualizePreset(droneData.Value);
         drone.transform.SetParent(this.transform);
         drone.transform.position = this.transform.position;
         drone.transform.rotation = this.transform.rotation;
