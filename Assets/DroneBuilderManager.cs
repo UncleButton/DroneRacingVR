@@ -24,21 +24,21 @@ public class DroneBuilderManager : MonoBehaviour
         
 
         currentIndex = 0;
-        currentName = dbScript.getPresets().data.Keys[0];
+        currentName = dbScript.GetPresets().data.Keys[0];
         RebuildPresetAtIndex(currentIndex);        
     }
 
     public Preset RebuildPresetAtIndex(int index)
     {
-        currentName = dbScript.getPresets().data.Keys[index];
-        DestroyAndVisualize(dbScript.getPresets().data.Values[index]);
+        currentName = dbScript.GetPresets().data.Keys[index];
+        DestroyAndVisualize(dbScript.GetPresets().data.Values[index]);
         return currentPreset;
     }
 
     public Preset RebuildPresetByName(string name)
     {
         currentName = name;
-        DestroyAndVisualize(dbScript.getPresets().data[name]);
+        DestroyAndVisualize(dbScript.GetPresets().data[name]);
         return currentPreset;
     }
 
@@ -97,7 +97,7 @@ public class DroneBuilderManager : MonoBehaviour
         if (currentName == null)
             currentIndex = 0;
         else
-            currentIndex = dbScript.getPresets().data.IndexOfKey(currentName);
+            currentIndex = dbScript.GetPresets().data.IndexOfKey(currentName);
 
 
         currentPreset = preset;
@@ -117,12 +117,12 @@ public class DroneBuilderManager : MonoBehaviour
 
     public void SavePreset()
     {
-        dbScript.updatePresets(currentName, currentPreset);
+        dbScript.UpdatePresets(currentName, currentPreset);
     }
 
     public void NextPreset()
     {
-        if (currentIndex < dbScript.getPresets().data.Count - 1)
+        if (currentIndex < dbScript.GetPresets().data.Count - 1)
             RebuildPresetAtIndex(++currentIndex);
         else
             RebuildPresetAtIndex(0);
@@ -132,13 +132,13 @@ public class DroneBuilderManager : MonoBehaviour
         if (currentIndex > 0)
             RebuildPresetAtIndex(--currentIndex);
         else
-            RebuildPresetAtIndex(dbScript.getPresets().data.Count-1);
+            RebuildPresetAtIndex(dbScript.GetPresets().data.Count-1);
     }
 
     public void NewPreset()
     {
-        dbScript.updatePresets("Drone " + (dbScript.getPresets().data.Count+1), defaultPreset);
-        RebuildPresetAtIndex(dbScript.getPresets().data.Count - 1);
+        dbScript.UpdatePresets("Drone " + (dbScript.GetPresets().data.Count+1), defaultPreset);
+        RebuildPresetAtIndex(dbScript.GetPresets().data.Count - 1);
     }
 
 }

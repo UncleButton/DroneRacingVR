@@ -1662,17 +1662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb197a658f9415d4d8779d2b902912fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneData:
-    body: 
-    prop: 
-    bodyCol1: 
-    bodyMat1: 
-    bodyCol2: 
-    bodyMat2: 
-    propCol1: 
-    propMat1: 
-    propCol2: 
-    propMat2: 
   parent: {fileID: 4523220834371401475}
 --- !u!1 &4344176553475451096
 GameObject:
@@ -11423,7 +11412,7 @@ GameObject:
   - component: {fileID: 5340708517687799368}
   - component: {fileID: 6970462016422793938}
   m_Layer: 5
-  m_Name: Return To Menu
+  m_Name: Return To Garage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11530,7 +11519,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 599193715046005096}
-        m_MethodName: loadGarage
+        m_MethodName: LoadGarage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12265,7 +12254,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 599193715046005096}
-        m_MethodName: toggleTracers
+        m_MethodName: ToggleTracers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12370,7 +12359,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 599193715046005096}
-        m_MethodName: toggleElevationStabilization
+        m_MethodName: ToggleElevationStabilization
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12560,9 +12549,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4523220834371401475}
-        m_MethodName: 
-        m_Mode: 4
+      - m_Target: {fileID: 6166961423148118410}
+        m_MethodName: UpdateMultiplier
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12584,7 +12573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drone: {fileID: 4523220834371401475}
-  spinText: {fileID: 0}
+  spinText: {fileID: 900792412434433807}
 --- !u!1 &7355208016500972522
 GameObject:
   m_ObjectHideFlags: 0
@@ -13084,7 +13073,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 599193715046005096}
-        m_MethodName: setInactive
+        m_MethodName: SetInactive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

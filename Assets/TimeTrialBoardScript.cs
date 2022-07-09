@@ -22,7 +22,7 @@ public class TimeTrialBoardScript : MonoBehaviour
     void Start()
     {
         timeTrialScript = ScriptableObject.CreateInstance<TimeTrialScript>();
-        timeTrials = timeTrialScript.getTimes();
+        timeTrials = timeTrialScript.GetTimes();
 
         timeTrialBoard = GameObject.FindGameObjectWithTag("TimeTrialBoard");
         startPos = timeTrialBoard.transform.position + new Vector3(0f, 0.4f, -2.2f);
@@ -40,9 +40,9 @@ public class TimeTrialBoardScript : MonoBehaviour
             string courseName = dirs[i].Replace(".meta", "").Replace(coursesFolderPath+"\\","");
             string thumbnail = "Courses/"+courseName+"/TTThumbnail";
 
-            if (timeTrials.getTimeTrial().ContainsKey(courseName))
+            if (timeTrials.GetTimeTrial().ContainsKey(courseName))
             {
-                TimeSpan timerSpan = TimeSpan.FromSeconds(timeTrials.getTimeTrial()[courseName].getTime());
+                TimeSpan timerSpan = TimeSpan.FromSeconds(timeTrials.GetTimeTrial()[courseName].GetTime());
                 newCourse.GetComponent<TTCoursePanelScript>().setBestTime(timerSpan.ToString(@"mm\:ss\:fff"));
             }
             else

@@ -23,7 +23,7 @@ public class PreGameDroneBuilder : NetworkBehaviour
         dbManager.dronePlacement = this.transform;
         if (IsLocalPlayer || isNotNetworked)
         {
-            this.droneData.Value = dbScript.getPresets().data.Values[0];
+            this.droneData.Value = dbScript.GetPresets().data.Values[0];
         }
     }
 

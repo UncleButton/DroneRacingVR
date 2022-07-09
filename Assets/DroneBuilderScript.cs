@@ -9,16 +9,16 @@ public class DroneBuilderScript : ScriptableObject
 {
 
     private Preset defaultPreset = new Preset("Arcane", "BiProp", "#e134eb", "Matte", "#000000", "Glossy", "#e134eb", "Matte", "#000000", "Glossy");
-    public bool presetExists(string presetName)
+    public bool PresetExists(string presetName)
     {
-        Presets presets = getPresets();
+        Presets presets = GetPresets();
         if (presets.Equals(new Presets()))
             return false;
 
         return presets.data.ContainsKey(presetName);
     }
 
-    private void setPresets(Presets presets)
+    private void SetPresets(Presets presets)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/DronePresets.dat");
@@ -27,11 +27,11 @@ public class DroneBuilderScript : ScriptableObject
         file.Close();
     }
 
-    public Presets getPresets()
+    public Presets GetPresets()
     {
         if (!File.Exists(Application.persistentDataPath + "/DronePresets.dat"))
         {
-            setPresets(new Presets("Drone 1", defaultPreset));
+            SetPresets(new Presets("Drone 1", defaultPreset));
         }
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -42,9 +42,9 @@ public class DroneBuilderScript : ScriptableObject
 
     }
 
-    public void updatePresets(string presetName, Preset presetData)
+    public void UpdatePresets(string presetName, Preset presetData)
     {
-        Presets currentPresets = getPresets();
+        Presets currentPresets = GetPresets();
 
         if (currentPresets.data.ContainsKey(presetName))
         {
@@ -53,16 +53,16 @@ public class DroneBuilderScript : ScriptableObject
         else
             currentPresets.data.Add(presetName, presetData);//new preset, add it
 
-        setPresets(currentPresets);//save presets
+        SetPresets(currentPresets);//save presets
     }
 
-    public void updateName(string oldName, string newName) {
-        if (presetExists(oldName))
+    public void UpdateName(string oldName, string newName) {
+        if (PresetExists(oldName))
         {
-            Presets presets = getPresets();
+            Presets presets = GetPresets();
             presets.data.Add(newName, presets.data[oldName]);
             presets.data.Remove(oldName);
-            setPresets(presets);
+            SetPresets(presets);
         }
     }
 

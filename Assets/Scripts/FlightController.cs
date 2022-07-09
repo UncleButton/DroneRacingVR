@@ -130,7 +130,7 @@ public class FlightController : NetworkBehaviour
         //////////////////////////////////////////////////////////////////////////////////
         liftSpinDevice.TryGetFeatureValue(CommonUsages.menuButton, out settingsOn);
         if (settingsOn)
-            settingsMenu.GetComponent<SettingsPanel>().setActive();
+            settingsMenu.GetComponent<SettingsPanel>().SetActive();
     }
 
     void NonPlayerCalculations()

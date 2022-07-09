@@ -7,16 +7,16 @@ using System.IO;
 
 public class TimeTrialScript : ScriptableObject
 {
-    public bool trialExists(string courseName)
+    public bool TrialExists(string courseName)
     {
-        TimeTrials timeTrials = getTimes();
+        TimeTrials timeTrials = GetTimes();
         if (timeTrials.Equals(new TimeTrials()))
             return false;
 
-        return timeTrials.getTimeTrial().ContainsKey(courseName);
+        return timeTrials.GetTimeTrial().ContainsKey(courseName);
     }
 
-    private void setTimes(TimeTrials times)
+    private void SetTimes(TimeTrials times)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/CourseTimes.dat");
@@ -25,7 +25,7 @@ public class TimeTrialScript : ScriptableObject
         file.Close();
     }
 
-    public TimeTrials getTimes()
+    public TimeTrials GetTimes()
     {
         if (File.Exists(Application.persistentDataPath + "/CourseTimes.dat"))
         {
@@ -39,22 +39,22 @@ public class TimeTrialScript : ScriptableObject
             return new TimeTrials();
     }
 
-    public void updateTimeTrialTimes(string courseName, List<GhostRiderData> ghostRiderData)
+    public void UpdateTimeTrialTimes(string courseName, List<GhostRiderData> ghostRiderData)
     {
-        TimeTrials currentBest = getTimes();
+        TimeTrials currentBest = GetTimes();
         float timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScript>().timer;
-        if (currentBest.getTimeTrial().ContainsKey(courseName))
+        if (currentBest.GetTimeTrial().ContainsKey(courseName))
         {
-            if (timer < currentBest.getTimeTrial()[courseName].getTime())
+            if (timer < currentBest.GetTimeTrial()[courseName].GetTime())
             {
-                currentBest.getTimeTrial()[courseName].setTime(timer);//time is beat, replace saved time with new time
-                currentBest.getTimeTrial()[courseName].setData(ghostRiderData);
+                currentBest.GetTimeTrial()[courseName].SetTime(timer);//time is beat, replace saved time with new time
+                currentBest.GetTimeTrial()[courseName].SetData(ghostRiderData);
             }
         }
         else
-            currentBest.getTimeTrial().Add(courseName, new TimeTrialData(timer, ghostRiderData));//first attempt.  add course to time trial mapping
+            currentBest.GetTimeTrial().Add(courseName, new TimeTrialData(timer, ghostRiderData));//first attempt.  add course to time trial mapping
 
-        setTimes(currentBest);//save times
+        SetTimes(currentBest);//save times
     }
 }
 
@@ -78,7 +78,7 @@ public class TimeTrials
         data = new SortedDictionary<string, TimeTrialData>();
     }
 
-    public SortedDictionary<string, TimeTrialData>  getTimeTrial()
+    public SortedDictionary<string, TimeTrialData>  GetTimeTrial()
     {
         return this.data;
     }
@@ -99,17 +99,17 @@ public class GhostRiderData
         this.timeStamp = timeStamp;
     }
 
-    public Vector3 getPos()
+    public Vector3 GetPos()
     {
         return this.position;
     }
 
-    public Quaternion getRot()
+    public Quaternion GetRot()
     {
         return this.rotation;
     }
 
-    public float getTimeStamp()
+    public float GetTimeStamp()
     {
         return this.timeStamp;
     }
@@ -128,22 +128,22 @@ public class TimeTrialData
         this.data = data;
     }
 
-    public float getTime()
+    public float GetTime()
     {
         return this.time;
     }
 
-    public void setTime(float newTime)
+    public void SetTime(float newTime)
     {
         this.time = newTime;
     }
 
-    public List<GhostRiderData> getData()
+    public List<GhostRiderData> GetData()
     {
         return this.data;
     }
 
-    public void setData(List<GhostRiderData> newData)
+    public void SetData(List<GhostRiderData> newData)
     {
         this.data = newData;
     }

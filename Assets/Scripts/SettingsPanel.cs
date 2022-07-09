@@ -12,7 +12,6 @@ public class SettingsPanel : MonoBehaviour
     public GameObject drone;
 
     private FlightController flightController = null;
-    private FlightControllerSinglePlayer flightControllerSinglePlayer = null;
 
     public GameObject tracers;
 
@@ -22,7 +21,7 @@ public class SettingsPanel : MonoBehaviour
         tracers = GameObject.FindGameObjectWithTag("Tracers");
     }
 
-    public void setInactive()
+    public void SetInactive()
     {
         Time.timeScale = 1;
         flightController.enabled = true;
@@ -30,7 +29,7 @@ public class SettingsPanel : MonoBehaviour
         gameVRRig.SetActive(true);
     }
 
-    public void setActive()
+    public void SetActive()
     {
         Time.timeScale = 0;
         gameVRRig.SetActive(false);
@@ -38,26 +37,19 @@ public class SettingsPanel : MonoBehaviour
         flightController.enabled = false;
     }
 
-    public void loadGarage()
+    public void LoadGarage()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Garage");
     }
 
-    public void toggleTracers()
+    public void ToggleTracers()
     {
         tracers.SetActive(!tracers.activeSelf);
     }
 
-    public void toggleElevationStabilization()
+    public void ToggleElevationStabilization()
     {
         flightController.elevationStabilization = !flightController.elevationStabilization;
     }
-
-    public void ExitSettings()
-    {
-        //settingsOpen = false;
-    }
-
-
 }
