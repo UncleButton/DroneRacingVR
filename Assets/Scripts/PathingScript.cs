@@ -34,11 +34,11 @@ public class PathingScript : MonoBehaviour
             Anchors.Add(Checkpoints[i].GetChild(1));
             if (i == Checkpoints.Count - 1)//last checkpoint
             {
-                Anchors.Add(Checkpoints[0].GetChild(0));
+                Anchors.Add(Checkpoints[0].GetChild(2));
             }
             else
             {
-                Anchors.Add(Checkpoints[i+1].GetChild(0));
+                Anchors.Add(Checkpoints[i+1].GetChild(2));
             }
 
         }
@@ -67,14 +67,14 @@ public class PathingScript : MonoBehaviour
         
         for (int i = 0; i < Checkpoints.Count; i++)
         {
-            movers[i].transform.GetChild(0).GetComponent<MeshRenderer>().material = Checkpoints[i].transform.GetChild(5).GetComponent<MeshRenderer>().material;
+            movers[i].transform.GetChild(0).GetComponent<MeshRenderer>().material = Checkpoints[i].transform.GetComponent<MeshRenderer>().material;
             if (i == Checkpoints.Count - 1)//last checkpoint
             {
-                movers[i].transform.position = CubicLerp(Checkpoints[i].GetChild(2).position, Anchors[i * 2].position, Anchors[i * 2 + 1].position, Checkpoints[0].GetChild(2).position, interpolateAmount);
+                movers[i].transform.position = CubicLerp(Checkpoints[i].GetChild(0).position, Anchors[i * 2].position, Anchors[i * 2 + 1].position, Checkpoints[0].GetChild(0).position, interpolateAmount);
             }
             else
             {
-                movers[i].transform.position = CubicLerp(Checkpoints[i].GetChild(2).position, Anchors[i * 2].position, Anchors[i * 2 + 1].position, Checkpoints[i + 1].GetChild(2).position, interpolateAmount);
+                movers[i].transform.position = CubicLerp(Checkpoints[i].GetChild(0).position, Anchors[i * 2].position, Anchors[i * 2 + 1].position, Checkpoints[i + 1].GetChild(0).position, interpolateAmount);
             }
         }
 

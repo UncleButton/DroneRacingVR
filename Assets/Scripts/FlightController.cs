@@ -31,15 +31,9 @@ public class FlightController : NetworkBehaviour
 
     public Canvas playerName;
 
-    public GameObject thrusterPosXNegZ;
-    public GameObject thrusterNegXNegZ;
-    public GameObject thrusterPosXPosZ;
-    public GameObject thrusterNegXPosZ;
+    public GameObject thruster;
 
-    private ThrustScript thrusterPosXPosZThrust;
-    private ThrustScript thrusterNegXNegZThrust;
-    private ThrustScript thrusterPosXNegZThrust;
-    private ThrustScript thrusterNegXPosZThrust;
+    private ThrustScript thrusterThrust;
 
     public float masterThrust = 5f;
     private float masterThrustCopy;
@@ -53,11 +47,6 @@ public class FlightController : NetworkBehaviour
     public float spinDeadzone = 0.25f;
     public float liftDeadzone = 0.1f;
 
-    public float posXThrust = 0f;
-    public float negXThrust = 0f;
-    public float posZThrust = 0f;
-    public float negZThrust = 0f;
-
     public NetworkVariable<string[]> currentPreset = new NetworkVariable<string[]>(); 
 
     // Start is called before the first frame update
@@ -69,13 +58,10 @@ public class FlightController : NetworkBehaviour
         if (IsLocalPlayer || isNotNetworked)
         {
             DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-            Debug.Log("Setting preset");
             currentPreset.Value = dbScript.getPresets().data.Values[0].toArray();
 
-            thrusterPosXPosZThrust = thrusterPosXPosZ.GetComponent<ThrustScript>();
-            thrusterNegXNegZThrust = thrusterNegXNegZ.GetComponent<ThrustScript>();
-            thrusterPosXNegZThrust = thrusterPosXNegZ.GetComponent<ThrustScript>();
-            thrusterNegXPosZThrust = thrusterNegXPosZ.GetComponent<ThrustScript>();
+            thrusterThrust = thruster.GetComponent<ThrustScript>();
+
             masterThrustCopy = masterThrust;
 
             flightDeckRB = flightDeck.GetComponent<Rigidbody>();
@@ -123,11 +109,6 @@ public class FlightController : NetworkBehaviour
         if (settingsOn)
             settingsMenu.GetComponent<SettingsPanel>().setActive();
 
-        posXThrust = 0f;
-        negXThrust = 0f;
-        posZThrust = 0f;
-        negZThrust = 0f;
-
         if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
 
@@ -135,9 +116,9 @@ public class FlightController : NetworkBehaviour
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
 
         if (elevationStabilization)
-            hoverThrust = ((9.81f / 2f) / Mathf.Cos(Vector3.Angle(-flightDeckT.up, Vector3.down) * Mathf.Deg2Rad));
+            hoverThrust = ((9.81f / 0.5f) / Mathf.Cos(Vector3.Angle(-flightDeckT.up, Vector3.down) * Mathf.Deg2Rad));
         else
-            hoverThrust = (9.81f / 2f);
+            hoverThrust = (9.81f / 0.5f);
 
         //lift based on lift joystick
         if (liftSpinAxis.y >= liftDeadzone)
@@ -160,12 +141,8 @@ public class FlightController : NetworkBehaviour
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
 
-
         //do thrust after all the above calculations
-        thrusterPosXPosZThrust.force = (masterThrust + posXThrust + posZThrust) * flightDeckRB.mass;
-        thrusterNegXNegZThrust.force = (masterThrust + negXThrust + negZThrust) * flightDeckRB.mass;
-        thrusterPosXNegZThrust.force = (masterThrust + posXThrust + negZThrust) * flightDeckRB.mass;
-        thrusterNegXPosZThrust.force = (masterThrust + negXThrust + posZThrust) * flightDeckRB.mass;
+        thrusterThrust.force = masterThrust * flightDeckRB.mass;
 
         /*thrusterPosXNegZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
         thrusterPosXPosZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
