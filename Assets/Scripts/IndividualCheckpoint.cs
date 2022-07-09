@@ -15,7 +15,7 @@ public class IndividualCheckpoint : MonoBehaviour
         {
             isTriggered = true;
             Ring.GetComponent<MeshRenderer>().material = triggeredMat;
-            GameObject.FindGameObjectWithTag("LapManager").GetComponent<LapManager>().areAllCheckpointsTriggered();
+            GameObject.FindGameObjectWithTag("LapManager").GetComponent<LapManager>().AreAllCheckpointsTriggered();
         }
     }
 }

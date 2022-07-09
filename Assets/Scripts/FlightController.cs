@@ -51,27 +51,24 @@ public class FlightController : NetworkBehaviour
     public void Start()
     {
         isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
-        if (IsLocalPlayer || isNotNetworked)
-        {
-            DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-
-            thrusterThrust = thruster.GetComponent<ThrustScript>();
-
-            masterThrustCopy = masterThrust;
-
-            flightDeckRB = flightDeck.GetComponent<Rigidbody>();
-            flightDeckT = flightDeck.transform;
-            playerName.enabled = false;
-            this.tag = "Player";
-        }
-        else
+        if (!IsLocalPlayer && !isNotNetworked)
         {
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
             this.tag = "EnemyPlayer";
             Destroy(this);
         }
-        
+
+        DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
+
+        thrusterThrust = thruster.GetComponent<ThrustScript>();
+        masterThrustCopy = masterThrust;
+
+        flightDeckRB = flightDeck.GetComponent<Rigidbody>();
+        flightDeckT = flightDeck.transform;
+        playerName.enabled = false;
+        this.tag = "Player";
+
         Vector3 positionToSpwan = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().position;
         Quaternion rotationToSpawn = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation().rotation;
         SpawnClientRPC(positionToSpwan, rotationToSpawn);
@@ -88,22 +85,18 @@ public class FlightController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        droneSound.pitch = 1f + liftSpinAxis.y/1.5f;
-        if (IsLocalPlayer || isNotNetworked)
-            DroneMovement();
+        droneSound.pitch = 1f + liftSpinAxis.y / 1.5f;
+        PlayerInputActions();
+        NonPlayerCalculations();
     }
 
-    void DroneMovement()
+    void PlayerInputActions()
     {
+        //////////////////////////////////////////////////////////////////////////////////
+        ///                                 tilt                                       ///
+        //////////////////////////////////////////////////////////////////////////////////
         InputDevice tiltDevice = InputDevices.GetDeviceAtXRNode(tiltInputController);
         tiltDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out tiltAxis);
-
-        InputDevice liftSpinDevice = InputDevices.GetDeviceAtXRNode(liftSpinInputController);
-        liftSpinDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out liftSpinAxis);
-        liftSpinDevice.TryGetFeatureValue(CommonUsages.menuButton, out settingsOn);
-
-        if (settingsOn)
-            settingsMenu.GetComponent<SettingsPanel>().setActive();
 
         if (Mathf.Abs(tiltAxis.y) > tiltDeadzone)
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(tiltMaxAngle * tiltAxis.y, flightDeckT.rotation.eulerAngles.y, flightDeckT.rotation.eulerAngles.z), Time.deltaTime * tiltLerpSpeed);
@@ -111,12 +104,14 @@ public class FlightController : NetworkBehaviour
         if (Mathf.Abs(tiltAxis.x) > tiltDeadzone)
             flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y, -tiltMaxAngle * tiltAxis.x), Time.deltaTime * tiltLerpSpeed);
 
-        if (elevationStabilization)
-            hoverThrust = ((9.81f / 0.5f) / Mathf.Cos(Vector3.Angle(-flightDeckT.up, Vector3.down) * Mathf.Deg2Rad));
-        else
-            hoverThrust = (9.81f / 0.5f);
 
-        //lift based on lift joystick
+        //////////////////////////////////////////////////////////////////////////////////
+        ///                              lift and spin                                 ///
+        //////////////////////////////////////////////////////////////////////////////////
+        InputDevice liftSpinDevice = InputDevices.GetDeviceAtXRNode(liftSpinInputController);
+        liftSpinDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out liftSpinAxis);
+
+        //lift
         if (liftSpinAxis.y >= liftDeadzone)
             masterThrust = hoverThrust + masterThrustCopy * liftSpinAxis.y;
         else
@@ -125,26 +120,34 @@ public class FlightController : NetworkBehaviour
             droneSound.pitch = 0.8f;
         }
 
-
-        //if not controlling, level out
-        if (tiltAxis.x < tiltDeadzone && tiltAxis.x > -tiltDeadzone && tiltAxis.y < tiltDeadzone && tiltAxis.y > -tiltDeadzone)
-        {
-            flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(0, flightDeckT.rotation.eulerAngles.y, 0), Time.deltaTime * stabilizationSpeed);
-        }
-
-        //spinning
+        //spin
         if (Mathf.Abs(liftSpinAxis.x) > spinDeadzone)
             flightDeckT.rotation = Quaternion.Euler(flightDeckT.rotation.eulerAngles.x, flightDeckT.rotation.eulerAngles.y + liftSpinAxis.x * spinMultiplier, flightDeckT.rotation.eulerAngles.z);
 
 
+        //////////////////////////////////////////////////////////////////////////////////
+        ///                             settings button                                ///
+        //////////////////////////////////////////////////////////////////////////////////
+        liftSpinDevice.TryGetFeatureValue(CommonUsages.menuButton, out settingsOn);
+        if (settingsOn)
+            settingsMenu.GetComponent<SettingsPanel>().setActive();
+    }
+
+    void NonPlayerCalculations()
+    {
+        //if not controlling, level out tilt
+        if (tiltAxis.x < tiltDeadzone && tiltAxis.x > -tiltDeadzone && tiltAxis.y < tiltDeadzone && tiltAxis.y > -tiltDeadzone)
+            flightDeckT.rotation = Quaternion.Lerp(flightDeckT.rotation, Quaternion.Euler(0, flightDeckT.rotation.eulerAngles.y, 0), Time.deltaTime * stabilizationSpeed);
+
+        //keep elevation stable while tilting if desired
+        if (elevationStabilization)
+            hoverThrust = ((9.81f / 0.5f) / Mathf.Cos(Vector3.Angle(-flightDeckT.up, Vector3.down) * Mathf.Deg2Rad));
+        else
+            hoverThrust = (9.81f / 0.5f);
+
         //do thrust after all the above calculations
         thrusterThrust.force = masterThrust * flightDeckRB.mass;
-
-        /*thrusterPosXNegZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
-        thrusterPosXPosZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
-        thrusterNegXNegZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;
-        thrusterNegXPosZ.transform.GetChild(0).GetComponent<PropellerRotate>().rotateSpeed = masterThrust * flightDeckRB.mass + hoverThrust * 0.75f;*/
-
     }
+
 
 }

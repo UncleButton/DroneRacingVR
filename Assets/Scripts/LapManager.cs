@@ -12,12 +12,12 @@ public class LapManager : MonoBehaviour
     public int lapsRequired = 0;
     public Material untriggeredMat;
 
-    public void areAllCheckpointsTriggered()
+    public void AreAllCheckpointsTriggered()
     {
         allCheckpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         for (int i = 0; i < allCheckpoints.Length; i++)
         {
-            if (allCheckpoints[i].GetComponent<IndividualCheckpoint>().isTriggered == false)
+            if (allCheckpoints[i].GetComponentInChildren<IndividualCheckpoint>().isTriggered == false)
             {
                 Debug.Log(allCheckpoints[i].transform.parent.name);
                 return;

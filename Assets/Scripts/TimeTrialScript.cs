@@ -43,11 +43,13 @@ public class TimeTrialScript : ScriptableObject
     {
         TimeTrials currentBest = getTimes();
         float timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScript>().timer;
-
         if (currentBest.getTimeTrial().ContainsKey(courseName))
         {
             if (timer < currentBest.getTimeTrial()[courseName].getTime())
+            {
                 currentBest.getTimeTrial()[courseName].setTime(timer);//time is beat, replace saved time with new time
+                currentBest.getTimeTrial()[courseName].setData(ghostRiderData);
+            }
         }
         else
             currentBest.getTimeTrial().Add(courseName, new TimeTrialData(timer, ghostRiderData));//first attempt.  add course to time trial mapping

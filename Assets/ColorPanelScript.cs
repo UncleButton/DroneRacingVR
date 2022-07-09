@@ -32,22 +32,22 @@ public class ColorPanelScript : MonoBehaviour
         if (category.Equals("Propeller Color (Primary)"))
         {
             currentPreset.propCol1 = color;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Propeller Color (Secondary)"))
         {
             currentPreset.propCol2 = color;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Body Color (Primary)"))
         {
             currentPreset.bodyCol1 = color;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Body Color (Secondary)"))
         {
             currentPreset.bodyCol2 = color;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
     }
 

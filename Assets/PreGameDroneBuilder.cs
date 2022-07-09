@@ -39,7 +39,7 @@ public class PreGameDroneBuilder : NetworkBehaviour
 
     public void BuildDrone()
     {
-        drone = dbManager.visualizePreset(droneData.Value);
+        drone = dbManager.VisualizePreset(droneData.Value);
         drone.transform.SetParent(this.transform);
         drone.transform.position = this.transform.position;
         drone.transform.rotation = this.transform.rotation;

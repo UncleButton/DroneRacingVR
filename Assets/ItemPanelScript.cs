@@ -37,32 +37,32 @@ public class ItemPanelScript : MonoBehaviour
         if (category.Equals("Bodies"))
         {
             currentPreset.body = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Propellers"))
         {
             currentPreset.prop = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Propeller Materials (Primary)"))
         {
             currentPreset.propMat1 = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Propeller Materials (Secondary)"))
         {
             currentPreset.propMat2 = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Body Materials (Primary)"))
         {
             currentPreset.bodyMat1 = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
         else if (category.Equals("Body Materials (Secondary)"))
         {
             currentPreset.bodyMat2 = itemName.text;
-            dbManager.destroyAndVisualize(currentPreset);
+            dbManager.DestroyAndVisualize(currentPreset);
         }
 
     }

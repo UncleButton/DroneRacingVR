@@ -16,7 +16,7 @@ public class DroneBuilderManager : MonoBehaviour
     public int currentIndex;
 
     public Text nameText;
-    Preset defaultPreset = new Preset("Arcane", "BiProp", "#e1e1eb", "Shiny", "#000000", "Matte", "#e134eb", "Shiny", "#0ff000", "Matte");
+    public Preset defaultPreset = new Preset("Arcane", "BiProp", "#e1e1eb", "Shiny", "#000000", "Matte", "#e134eb", "Shiny", "#0ff000", "Matte");
 
     public void Start()
     {
@@ -25,35 +25,35 @@ public class DroneBuilderManager : MonoBehaviour
 
         currentIndex = 0;
         currentName = dbScript.getPresets().data.Keys[0];
-        rebuildPresetAtIndex(currentIndex);        
+        RebuildPresetAtIndex(currentIndex);        
     }
 
-    public Preset rebuildPresetAtIndex(int index)
+    public Preset RebuildPresetAtIndex(int index)
     {
         currentName = dbScript.getPresets().data.Keys[index];
-        destroyAndVisualize(dbScript.getPresets().data.Values[index]);
+        DestroyAndVisualize(dbScript.getPresets().data.Values[index]);
         return currentPreset;
     }
 
-    public Preset rebuildPresetByName(string name)
+    public Preset RebuildPresetByName(string name)
     {
         currentName = name;
-        destroyAndVisualize(dbScript.getPresets().data[name]);
+        DestroyAndVisualize(dbScript.getPresets().data[name]);
         return currentPreset;
     }
 
-    public Preset destroyAndVisualize(Preset preset)
+    public Preset DestroyAndVisualize(Preset preset)
     {
         if (GameObject.FindGameObjectWithTag("BuiltDrone"))
             Destroy(GameObject.FindGameObjectWithTag("BuiltDrone"));
 
-        visualizePreset(preset);
+        VisualizePreset(preset);
 
         return currentPreset;
     }
 
 
-    public GameObject visualizePreset(Preset preset)
+    public GameObject VisualizePreset(Preset preset)
     {
         GameObject droneInProgress = new GameObject("Drone");
         droneInProgress.transform.tag = "BuiltDrone";
@@ -68,16 +68,16 @@ public class DroneBuilderManager : MonoBehaviour
         Material[] bodyMats = { bodyMat1, bodyMat2 };
         body.GetComponent<MeshRenderer>().materials = bodyMats;
 
-        setColor(bodyMat1, preset.bodyCol1);
-        setColor(bodyMat2, preset.bodyCol2);
+        SetColor(bodyMat1, preset.bodyCol1);
+        SetColor(bodyMat2, preset.bodyCol2);
 
 
         /////////////////////////////////////////             Propeller Materials                  /////////////////////////////////////////////
         Material propMat1 = Instantiate(Resources.Load<Material>("DroneParts/Propeller Materials (Primary)/" + preset.propMat1 + "/" + preset.propMat1));//get color 1
         Material propMat2 = Instantiate(Resources.Load<Material>("DroneParts/Propeller Materials (Secondary)/" + preset.propMat2 + "/" + preset.propMat2));//get color 2
 
-        setColor(propMat1, preset.propCol1);
-        setColor(propMat2, preset.propCol2);
+        SetColor(propMat1, preset.propCol1);
+        SetColor(propMat2, preset.propCol2);
 
         Material[] propMats = { propMat1, propMat2 };
         foreach (Transform t in body.GetComponentsInChildren<Transform>())
@@ -108,37 +108,37 @@ public class DroneBuilderManager : MonoBehaviour
         return droneInProgress;
     }
 
-    public void setColor(Material material, string color)
+    public void SetColor(Material material, string color)
     {
         Color newCol;
         ColorUtility.TryParseHtmlString(color, out newCol);
         material.color = newCol;
     }
 
-    public void savePreset()
+    public void SavePreset()
     {
         dbScript.updatePresets(currentName, currentPreset);
     }
 
-    public void nextPreset()
+    public void NextPreset()
     {
         if (currentIndex < dbScript.getPresets().data.Count - 1)
-            rebuildPresetAtIndex(++currentIndex);
+            RebuildPresetAtIndex(++currentIndex);
         else
-            rebuildPresetAtIndex(0);
+            RebuildPresetAtIndex(0);
     }
-    public void previousPreset()
+    public void PreviousPreset()
     {
         if (currentIndex > 0)
-            rebuildPresetAtIndex(--currentIndex);
+            RebuildPresetAtIndex(--currentIndex);
         else
-            rebuildPresetAtIndex(dbScript.getPresets().data.Count-1);
+            RebuildPresetAtIndex(dbScript.getPresets().data.Count-1);
     }
 
-    public void newPreset()
+    public void NewPreset()
     {
         dbScript.updatePresets("Drone " + (dbScript.getPresets().data.Count+1), defaultPreset);
-        rebuildPresetAtIndex(dbScript.getPresets().data.Count - 1);
+        RebuildPresetAtIndex(dbScript.getPresets().data.Count - 1);
     }
 
 }
