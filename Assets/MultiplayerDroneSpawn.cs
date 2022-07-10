@@ -10,8 +10,6 @@ public class MultiplayerDroneSpawn : NetworkBehaviour
 {
     public Transform cameraTransform;
     public GameObject helmetGUI;
-    //public GameObject rightController;
-    //public GameObject leftController;
     public void Start()
     {
         if (!IsLocalPlayer)
@@ -21,9 +19,7 @@ public class MultiplayerDroneSpawn : NetworkBehaviour
             this.transform.tag = "EnemyPlayer";
             this.GetComponent<Rigidbody>().useGravity = false;
             this.GetComponent<Rigidbody>().isKinematic = true;
-            helmetGUI.SetActive(false);
-            //Destroy(rightController.GetComponent<XRDirectInteractor>());
-            //Destroy(leftController.GetComponent<XRDirectInteractor>());
+            Destroy(helmetGUI);
             Destroy(this.GetComponent<FlightController>());
         }
 

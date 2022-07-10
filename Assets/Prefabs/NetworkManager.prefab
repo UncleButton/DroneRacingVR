@@ -60,15 +60,13 @@ MonoBehaviour:
     - Garage
     - Downtown (bad)
     - Canyon
+    - Plateau
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
     - Prefab: {fileID: 4523220834371401475, guid: e06f72810754df944932749ca0ef99e3,
         type: 3}
       PlayerPrefab: 1
     - Prefab: {fileID: 3697889123192105240, guid: e7b06dd88893e8b4eb4865d15d5c0622,
-        type: 3}
-      PlayerPrefab: 0
-    - Prefab: {fileID: 2160875456611719257, guid: b5913cf1d965a4a4ca1e08228f7ebbba,
         type: 3}
       PlayerPrefab: 0
     PlayerPrefabHash:

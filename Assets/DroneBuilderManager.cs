@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DroneBuilderManager : ScriptableObject
+public class DroneBuilderManager : MonoBehaviour
 {
     public Transform droneBuilderManager;
     private DroneBuilderScript dbScript;

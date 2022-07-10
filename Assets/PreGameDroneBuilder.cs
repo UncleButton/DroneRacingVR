@@ -19,7 +19,7 @@ public class PreGameDroneBuilder : NetworkBehaviour
         droneData.Settings.ReadPermission = NetworkVariablePermission.Everyone;
         isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
         dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-        dbManager = ScriptableObject.CreateInstance<DroneBuilderManager>();
+        dbManager = new DroneBuilderManager();
         dbManager.dronePlacement = this.transform;
         if (isNotNetworked || IsOwner)
         {

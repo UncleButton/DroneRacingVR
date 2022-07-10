@@ -8,27 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Demo Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Menu.unity
-    guid: 4b80a096a2c78814c827b3d629b46734
   - enabled: 1
     path: Assets/Scenes/Garage.unity
     guid: ed0224367f5d5f44a9b05a0719fcedac
-  - enabled: 0
+  - enabled: 1
     path: Assets/Resources/Courses/Canyon/Canyon.unity
     guid: 71d4caed1c8b09b44867e392cccade2e
-  - enabled: 0
-    path: Assets/Scenes/Tutorial.unity
-    guid: c0e832cb9bf859a419a76ca3a545246c
-  - enabled: 0
-    path: Assets/Resources/Courses/Shipping Yard/Shipping Yard.unity
-    guid: 4e9dba78f7e784045bb0dae992de8b5f
   - enabled: 1
     path: Assets/Resources/Courses/Downtown (bad)/Downtown (bad).unity
     guid: 00e75be1ffdf2fd44983392bc97afe79
   - enabled: 1
     path: Assets/Resources/Courses/Downtown/Downtown.unity
     guid: be32b64fa0817cb4495c3442224f5d95
+  - enabled: 1
+    path: Assets/Resources/Courses/Plateau/Plateau.unity
+    guid: 704168c0500560f42a1237d3d3e4819d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2e96018029e3af2488c958fe621fbb1c,
       type: 2}

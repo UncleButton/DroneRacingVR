@@ -21,7 +21,8 @@ public class PathingScript : MonoBehaviour
         tracers = GameObject.FindGameObjectWithTag("Tracers");
         foreach(Transform child in this.transform)
         {
-            Checkpoints.Add(child);
+            if(child.tag == "Checkpoint")
+                Checkpoints.Add(child);
         }
         
 
