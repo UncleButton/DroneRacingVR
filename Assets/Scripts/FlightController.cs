@@ -9,7 +9,7 @@ using MLAPI.NetworkVariable;
 using MLAPI.Messaging;
 using MLAPI.Serialization;
 
-public class FlightController : NetworkBehaviour
+public class FlightController : MonoBehaviour
 {
     private bool isNotNetworked;
     public bool elevationStabilization = true;
@@ -25,7 +25,6 @@ public class FlightController : NetworkBehaviour
     public GameObject flightDeck;
     private Transform flightDeckT;
     private Rigidbody flightDeckRB;
-    public Transform cameraTransform;
 
     public AudioSource droneSound;
 
@@ -47,41 +46,14 @@ public class FlightController : NetworkBehaviour
     public float spinDeadzone = 0.25f;
     public float liftDeadzone = 0.1f;
 
-    // Start is called before the first frame update
     public void Start()
     {
-        isNotNetworked = (GameObject.FindGameObjectWithTag("NetworkManager") == null);
-        if (!IsLocalPlayer && !isNotNetworked)
-        {
-            cameraTransform.GetComponent<AudioListener>().enabled = false;
-            cameraTransform.GetComponent<Camera>().enabled = false;
-            this.transform.tag = "EnemyPlayer";
-            Destroy(this);
-        }
-
-        if (!isNotNetworked)
-        {
-            Transform spawnLocation = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerScript>().getSpawnLocation();
-            SpawnClientRPC(spawnLocation.position, spawnLocation.rotation);
-        }
-
-        DroneBuilderScript dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-
         thrusterThrust = thruster.GetComponent<ThrustScript>();
         masterThrustCopy = masterThrust;
 
         flightDeckRB = flightDeck.GetComponent<Rigidbody>();
         flightDeckT = flightDeck.transform;
         playerName.enabled = false;
-    }
-
-    [ClientRpc]
-    void SpawnClientRPC(Vector3 position, Quaternion rotation)
-    {
-        this.gameObject.SetActive(false);
-        this.transform.position = position;
-        this.transform.rotation = rotation;
-        this.gameObject.SetActive(true);
     }
 
     private void FixedUpdate()

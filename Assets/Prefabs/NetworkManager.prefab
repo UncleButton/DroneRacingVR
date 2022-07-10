@@ -62,7 +62,7 @@ MonoBehaviour:
     - Canyon
     AllowRuntimeSceneChanges: 0
     NetworkPrefabs:
-    - Prefab: {fileID: 4523220834371401475, guid: 9f7b90cc48b45fb45ab66b7b4d2bc6dd,
+    - Prefab: {fileID: 4523220834371401475, guid: e06f72810754df944932749ca0ef99e3,
         type: 3}
       PlayerPrefab: 1
     - Prefab: {fileID: 3697889123192105240, guid: e7b06dd88893e8b4eb4865d15d5c0622,
@@ -100,7 +100,7 @@ MonoBehaviour:
     00000000:
       type: {class: NullableBoolSerializable, ns: MLAPI.Configuration, asm: Unity.Multiplayer.MLAPI.Runtime}
       data:
-        Value: 13982722057793822801
+        Value: 3641957085213340371
 --- !u!114 &739089120396373188
 MonoBehaviour:
   m_ObjectHideFlags: 0

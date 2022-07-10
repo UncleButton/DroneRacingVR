@@ -9,7 +9,10 @@ public class SpawnManagerScript : NetworkBehaviour
 
     public Transform getSpawnLocation()
     {
-        return spawns[GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>().ConnectedClientsList.Count];
+        if (GameObject.FindGameObjectWithTag("NetworkManager") == null)
+            return spawns[1];
+        else
+            return spawns[GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>().ConnectedClientsList.Count];
 
     }
 
