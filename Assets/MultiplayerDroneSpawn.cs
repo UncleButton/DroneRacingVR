@@ -3,10 +3,15 @@ using MLAPI.Messaging;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class MultiplayerDroneSpawn : NetworkBehaviour
 {
     public Transform cameraTransform;
+    public GameObject helmetGUI;
+    //public GameObject rightController;
+    //public GameObject leftController;
     public void Start()
     {
         if (!IsLocalPlayer)
@@ -14,6 +19,11 @@ public class MultiplayerDroneSpawn : NetworkBehaviour
             cameraTransform.GetComponent<AudioListener>().enabled = false;
             cameraTransform.GetComponent<Camera>().enabled = false;
             this.transform.tag = "EnemyPlayer";
+            this.GetComponent<Rigidbody>().useGravity = false;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+            helmetGUI.SetActive(false);
+            //Destroy(rightController.GetComponent<XRDirectInteractor>());
+            //Destroy(leftController.GetComponent<XRDirectInteractor>());
             Destroy(this.GetComponent<FlightController>());
         }
 

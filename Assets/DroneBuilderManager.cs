@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DroneBuilderManager : MonoBehaviour
+public class DroneBuilderManager : ScriptableObject
 {
     public Transform droneBuilderManager;
     private DroneBuilderScript dbScript;
@@ -21,7 +21,6 @@ public class DroneBuilderManager : MonoBehaviour
     public void Start()
     {
         dbScript = ScriptableObject.CreateInstance<DroneBuilderScript>();
-        
 
         currentIndex = 0;
         currentName = dbScript.GetPresets().data.Keys[0];

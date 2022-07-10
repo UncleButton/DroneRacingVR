@@ -19,7 +19,6 @@ public class LapManager : MonoBehaviour
         {
             if (allCheckpoints[i].GetComponentInChildren<IndividualCheckpoint>().isTriggered == false)
             {
-                Debug.Log(allCheckpoints[i].transform.parent.name);
                 return;
             }
                 
