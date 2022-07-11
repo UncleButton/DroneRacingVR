@@ -68,7 +68,7 @@ public class PathingScript : MonoBehaviour
         
         for (int i = 0; i < Checkpoints.Count; i++)
         {
-            movers[i].transform.GetChild(0).GetComponent<MeshRenderer>().material = Checkpoints[i].transform.GetComponent<MeshRenderer>().material;
+            movers[i].transform.GetChild(0).GetComponent<MeshRenderer>().material = Checkpoints[i].GetChild(5).transform.GetComponent<MeshRenderer>().material;
             if (i == Checkpoints.Count - 1)//last checkpoint
             {
                 movers[i].transform.position = CubicLerp(Checkpoints[i].GetChild(0).position, Anchors[i * 2].position, Anchors[i * 2 + 1].position, Checkpoints[0].GetChild(0).position, interpolateAmount);

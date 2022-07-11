@@ -26,6 +26,12 @@ public class PreGameDroneBuilder : NetworkBehaviour
             droneData.Value = dbScript.GetPresets().data.Values[0].toArray();
         }
         droneData.OnValueChanged += PresetChanged;
+
+        if(!isNotNetworked && !IsServer)
+        {
+            PlayerJoined();
+        }
+
     }
 
     public void PresetChanged(string[] oldValue, string[] newValue)
@@ -40,4 +46,10 @@ public class PreGameDroneBuilder : NetworkBehaviour
         drone.transform.position = this.transform.position;
         drone.transform.rotation = this.transform.rotation;
     }
+
+    public void PlayerJoined()
+    {
+        GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<SyncTime>().SyncMe();
+    }
+
 }
