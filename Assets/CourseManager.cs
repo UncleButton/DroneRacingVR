@@ -13,12 +13,15 @@ public class CourseManager : MonoBehaviour
     //multiplayer
     public GameObject networkManager;
     public GameObject join_hostMenu;
+    public GameObject multiplayerPackage;
+
     void Start()
     {
         if (isMultiplayer)
         {
             Instantiate(networkManager);
             Instantiate(join_hostMenu);
+            Instantiate(multiplayerPackage);
         }
         else
         {

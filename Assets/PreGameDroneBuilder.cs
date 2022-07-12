@@ -49,7 +49,7 @@ public class PreGameDroneBuilder : NetworkBehaviour
 
     public void PlayerJoined()
     {
-        GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<SyncTime>().SyncMe();
+        GameObject.FindGameObjectWithTag("SyncTime").GetComponent<SyncTime>().SyncMe();
     }
 
 }

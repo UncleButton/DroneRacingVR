@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 739089120396373190}
   - component: {fileID: 739089120396373191}
   - component: {fileID: 739089120396373188}
-  - component: {fileID: -5961645867927691206}
-  - component: {fileID: -8419821629858920465}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: NetworkManager
@@ -127,34 +125,3 @@ MonoBehaviour:
   MLAPIRelayAddress: 184.72.104.138
   MLAPIRelayPort: 8888
   MessageSendMode: 0
---- !u!114 &-5961645867927691206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739089120396373189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f58f6dc42681a2c45a75b5106c9e9e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  networkTime: 0
-  latancy: 0
---- !u!114 &-8419821629858920465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739089120396373189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NetworkInstanceId: 0
-  PrefabHash: 4958552692013540202
-  PrefabHashGenerator: NetworkManager
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0

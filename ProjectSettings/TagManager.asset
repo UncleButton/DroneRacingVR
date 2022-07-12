@@ -19,6 +19,8 @@ TagManager:
   - BuiltDrone
   - ItemPanel
   - NetworkManager
+  - SyncTime
+  - GameManager
   layers:
   - Default
   - TransparentFX

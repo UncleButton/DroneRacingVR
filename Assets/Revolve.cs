@@ -14,9 +14,9 @@ public class Revolve : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(GameObject.FindGameObjectWithTag("NetworkManager") != null)
+        if(GameObject.FindGameObjectWithTag("SyncTime") != null)
         {
-            networkedTime = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<SyncTime>();
+            networkedTime = GameObject.FindGameObjectWithTag("SyncTime").GetComponent<SyncTime>();
             networkTimerFound = true;
         }
         else if (GameObject.FindGameObjectWithTag("Timer") != null)

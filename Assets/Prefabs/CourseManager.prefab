@@ -52,3 +52,5 @@ MonoBehaviour:
     type: 3}
   join_hostMenu: {fileID: 815725259238617091, guid: 873df221cd3423d4f93953d9b5da268a,
     type: 3}
+  multiplayerPackage: {fileID: 3561943541484006941, guid: bbfa304f80a399043893c42517cc3515,
+    type: 3}
